@@ -26,7 +26,6 @@ module.exports={
         type: 'Point',
         coordinates:[longitude,latitude],
       }
-    
       dev = await Dev.create({
         github_username,
         name,
@@ -35,9 +34,7 @@ module.exports={
         techs: techsArray,
         location,
       });
-    
     }
-
     return response.json(dev);
   }
 };
