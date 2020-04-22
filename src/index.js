@@ -2,7 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors =  require('cors');
 const routes = require('./routes'); 
+const http = require('http');
+const {setupWebSocket} = require('./webSocket');
+
 const app = express();
+const server = http.Server(app);
+
+
+setupWebSocket(server); 
 
 mongoose.connect('mongodb+srv://lucas:lucas@cluster0-elxqr.mongodb.net/week10?retryWrites=true&w=majority',{
   useNewUrlParser: true,
@@ -13,7 +20,8 @@ mongoose.connect('mongodb+srv://lucas:lucas@cluster0-elxqr.mongodb.net/week10?re
 app.use(cors());
 app.use(express.json());
 app.use(routes);
-app.listen(3333);
+server.listen(3333);
+
 /**
  * Métodos HTTP -> GET, POST PUT, DELETE
  * 
